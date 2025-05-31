@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Priya | Web Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary: #7f5af0;
+      --secondary: #2cb67d;
+      --dark: #16161a;
+      --light: #fffffe;
+      --gray: #94a1b2;
+      --accent: #f25f4c;
+      --bg-gradient: linear-gradient(to right top, #7f5af0, #2cb67d);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--dark);
+      color: var(--light);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--bg-gradient);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    section {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    p, li {
+      font-size: 1.05rem;
+      color: var(--gray);
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    input, select, button {
+      font-family: inherit;
+      padding: 0.7rem;
+      margin-top: 0.7rem;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    input {
+      width: calc(100% - 1.5rem);
+      background: #242629;
+      color: var(--light);
+    }
+
+    button {
+      background: var(--secondary);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: var(--accent);
+    }
+
+    #todo-list li {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      border-radius: 10px;
+      margin: 10px 0;
+      color: var(--light);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+    }
+
+    .controls {
+      margin: 1rem 0;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .product {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 1rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--gray);
+      border-top: 1px solid #2e2e2e;
+      margin-top: 3rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    a {
+      color: var(--secondary);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Priya's Creative Portfolio</h1>
+    <nav>
+      <a onclick="showSection('portfolio')">Portfolio</a>
+      <a onclick="showSection('todo')">To-Do</a>
+      <a onclick="showSection('products')">Products</a>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="active">
+      <h2>About Me</h2>
+      <p>
+        Hello! I’m <strong>Priya</strong>, a passionate front-end developer and designer who blends creativity with code.
+        I specialize in crafting responsive, modern websites using HTML, CSS, and JavaScript.
+        My mission is to turn ideas into digital experiences that users enjoy.
+      </p>
+
+      <p>
+        Whether it’s a personal project or client work, I care deeply about detail, usability, and performance.
+        I'm also enthusiastic about UI/UX design and animation to bring interfaces to life.
+      </p>
+
+      <h2>Projects</h2>
+      <ul>
+        <li>✔️ Responsive Portfolio Website</li>
+        <li>✔️ To-Do App with Persistent Local Storage</li>
+        <li>✔️ Dynamic Product Listing Page with Filters</li>
+      </ul>
+
+      <h2>Contact</h2>
+      <p>Reach out to me at: <a href="mailto:vishnumahanthimurali@gmail.com">vishnumahanthimurali@gmail.com</a></p>
+    </section>
+
+    <!-- To-Do List -->
+    <section id="todo">
+      <h2>To-Do List</h2>
+      <input type="text" id="taskInput" placeholder="Add a new task..." />
+      <button onclick="addTask()">Add Task</button>
+      <ul id="todo-list"></ul>
+    </section>
+
+    <!-- Product Section -->
+    <section id="products">
+      <h2>Products</h2>
+      <div class="controls">
+        <label>
+          Category:
+          <select id="categoryFilter">
+            <option value="">All</option>
+            <option value="electronics">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="accessories">Accessories</option>
+            <option value="home">Home</option>
+          </select>
+        </label>
+        <label>
+          Sort by:
+          <select id="sortOption">
+            <option value="price">Price</option>
+            <option value="rating">Rating</option>
+          </select>
+        </label>
+        <button onclick="filterProducts()">Apply</button>
+      </div>
+      <div id="productList" class="product-grid"></div>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>Designed with 💙 by Priya &middot; &copy; 2025</p>
+  </footer>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll("section").forEach((s) => s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+
+    // To-Do List
+    let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+
+    function renderTasks() {
+      const list = document.getElementById("todo-list");
+      list.innerHTML = "";
+      tasks.forEach((task, i) => {
+        const li = document.createElement("li");
+        li.textContent = task;
+        li.onclick = () => {
+          tasks.splice(i, 1);
+          saveTasks();
+          renderTasks();
+        };
+        list.appendChild(li);
+      });
+    }
+
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      if (input.value.trim()) {
+        tasks.push(input.value.trim());
+        input.value = "";
+        saveTasks();
+        renderTasks();
+      }
+    }
+
+    function saveTasks() {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    renderTasks();
+
+    // Product List
+    const products = [
+      { name: "Smartphone", category: "electronics", price: 699, rating: 4.8 },
+      { name: "Laptop", category: "electronics", price: 999, rating: 4.5 },
+      { name: "Shirt", category: "clothing", price: 30, rating: 4.0 },
+      { name: "Jeans", category: "clothing", price: 50, rating: 4.3 },
+      { name: "Watch", category: "accessories", price: 199, rating: 4.6 },
+      { name: "Backpack", category: "accessories", price: 70, rating: 4.2 },
+      { name: "Blender", category: "home", price: 60, rating: 4.1 },
+      { name: "Desk Lamp", category: "home", price: 40, rating: 4.3 },
+    ];
+
+    function filterProducts() {
+      const category = document.getElementById("categoryFilter").value;
+      const sort = document.getElementById("sortOption").value;
+      let filtered = [...products];
+      if (category) filtered = filtered.filter((p) => p.category === category);
+      filtered.sort((a, b) => b[sort] - a[sort]);
+
+      const container = document.getElementById("productList");
+      container.innerHTML = filtered
+        .map(
+          (p) => `
+        <div class="product">
+          <h3>${p.name}</h3>
+          <p><strong>Category:</strong> ${p.category}</p>
+          <p><strong>Price:</strong> $${p.price}</p>
+          <p><strong>Rating:</strong> ⭐ ${p.rating}</p>
+        </div>
+      `
+        )
+        .join("");
+    }
+
+    filterProducts();
+  </script>
+</body>
+</html>
